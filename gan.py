@@ -12,15 +12,13 @@ class Discriminator(nn.Module):
         super().__init__()
         self.disc = nn.Sequential(
             nn.Linear(in_features, 128), 
-            nn.LeakyReLU(0.1), 
+            nn.LeakyReLU(0.1),
             nn.Linear(128, 1), 
             nn.Sigmoid(),
         )
-
     def forward(self, x):
         return self.disc(x)
     
-
 class Generator(nn.Module):
     def __init__(self, z_dim, img_dim):
         super().__init__()
@@ -30,7 +28,6 @@ class Generator(nn.Module):
             nn.Linear(256, img_dim), 
             nn.Tanh(),
         )
-
 
     def forward(self, x):
         return self.gen(x)
@@ -106,4 +103,3 @@ for epoch in range(num_epochs):
                 )
 
                 step += 1 
-                    
