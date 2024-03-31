@@ -8,13 +8,13 @@ import torchvision.transforms as transforms
 
 from torch.utils.tensorboard import SummaryWriter
 
-class Discriminator(nn.Module): 
+class Discriminator(nn.Module):
     def __init__(self, in_features):
-        super().__init__()1
+        super().__init__()
         self.disc = nn.Sequential(
             nn.Linear(in_features, 128),
             nn.LeakyReLU(0.1),
-            nn.Linear(128, 1), 
+            nn.Linear(128, 1),
             nn.Sigmoid(),
         )
     def forward(self, x):
@@ -54,8 +54,8 @@ loader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
 opt_disc = optim.Adam(disc.parameters(), lr=lr)
 opt_gen = optim.Adam(gen.parameters(), lr=lr)
 criterion = nn.BCELoss()
-writer_fake = SummaryWriter(f"logs/GAN_MNIST/fake")
-writer_real = SummaryWriter(f"logs/GAN_MNIST/real")
+writer_fake = SummaryWriter("logs/GAN_MNIST/fake")
+writer_real = SummaryWriter("logs/GAN_MNIST/real")
 step = 0
 
 for epoch in range(num_epochs):
@@ -103,4 +103,5 @@ for epoch in range(num_epochs):
                     "Mnist real images", img_grid_real, global_step=step
                 )
 
-                step += 1 
+                step += 1
+                
